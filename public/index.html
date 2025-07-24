@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Subscribe</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+
+    .signup-container {
+      background-color: #ccc;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: fit-content;
+      font-weight: bold;
+    }
+
+    .signup-container input[type="email"] {
+      padding: 6px;
+      font-size: 14px;
+    }
+
+    .signup-container button {
+      background-color: #999;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .signup-container button:hover {
+      background-color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    SIGN UP FOR OUR DAILY INSIDER
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <button onclick="subscribe()">Subscribe</button>
+  </div>
+
+  <script>
+    async function subscribe() {
+      const email = document.getElementById('email').value;
+      if (!email) return alert('Please enter an email.');
+
+      const response = await fetch('/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+
+      const message = await response.text();
+      alert(message);
+    }
+  </script>
+
+</body>
+</html>
